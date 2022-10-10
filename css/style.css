@@ -217,6 +217,24 @@ a:hover {
   }
 }
 
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.loader-container.fade-out {
+  top: -120%;
+}
+
 .home .content h3 {
   font-size: 5rem;
   color: #333;

@@ -531,11 +531,21 @@ sendOrderBtn.addEventListener("click", () => {
 /* } */
 /* } */
 
+function loader() {
+  document.querySelector('.loader-container').classList.add('fade-out');
+}
+
 window.onload=function () {
   shoppingCart.clearCart();
   carritoEnTexto = "";
   displayCart();
 }
+
+function fadeOut() {
+  setInterval(loader, 3000);
+}
+
+window.onload = fadeOut();
 
 /* sendOrder(); */
 popupWhatsApp();
