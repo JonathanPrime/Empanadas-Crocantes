@@ -3,6 +3,29 @@ let menu = document.querySelector('#menu-btn');
 let navbar = document.querySelector('.header .nav');
 var carritoEnTexto = "";
 
+setTimeout(() => {
+  document.getElementsByClassName("click")[0].click();
+}, 1000);
+
+(function ($) {
+  "use strict";
+
+
+  // Portfolio isotope and filter
+  var portfolioIsotope = $('.portfolio-container').isotope({
+    itemSelector: '.portfolio-item',
+    layoutMode: 'fitRows'
+  });
+
+  $('#portfolio-flters li').on('click', function () {
+    $("#portfolio-flters li").removeClass('active');
+    $(this).addClass('active');
+
+    portfolioIsotope.isotope({ filter: $(this).data('filter') });
+  });
+
+})(jQuery);
+
 menu.onclick = () => {
   menu.classList.toggle('fa-times');
   navbar.classList.toggle('active');
@@ -25,7 +48,7 @@ window.onscroll = () => {
 // Shopping Cart API
 // ************************************************
 
-var shoppingCart = (function() {
+var shoppingCart = (function () {
   // =============================
   // Private methods and propeties
   // =============================
@@ -34,38 +57,38 @@ var shoppingCart = (function() {
     // Cargar desde localStorage o inicializar como arreglo vacío
     cart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
   });
-  
+
   // Constructor
   function Item(name, price, count) {
     this.name = name;
     this.price = price;
     this.count = count;
   }
-  
+
   // Save cart
   function saveCart() {
     sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
   }
-  
-    // Load cart
+
+  // Load cart
   function loadCart() {
     cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
   }
   if (sessionStorage.getItem("shoppingCart") != null) {
     loadCart();
   }
-  
+
 
   // =============================
   // Public methods and propeties
   // =============================
   var obj = {};
-  
+
   // Add to cart
-  obj.addItemToCart = function(name, price, count) {
-    for(var item in cart) {
-      if(cart[item].name === name) {
-        cart[item].count ++;
+  obj.addItemToCart = function (name, price, count) {
+    for (var item in cart) {
+      if (cart[item].name === name) {
+        cart[item].count++;
         saveCart();
         return;
       }
@@ -75,8 +98,8 @@ var shoppingCart = (function() {
     saveCart();
   }
   // Set count from item
-  obj.setCountForItem = function(name, count) {
-    for(var i in cart) {
+  obj.setCountForItem = function (name, count) {
+    for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
         break;
@@ -84,23 +107,23 @@ var shoppingCart = (function() {
     }
   };
   // Remove item from cart
-  obj.removeItemFromCart = function(name) {
-      for(var item in cart) {
-        if(cart[item].name === name) {
-          cart[item].count --;
-          if(cart[item].count === 0) {
-            cart.splice(item, 1);
-          }
-          break;
+  obj.removeItemFromCart = function (name) {
+    for (var item in cart) {
+      if (cart[item].name === name) {
+        cart[item].count--;
+        if (cart[item].count === 0) {
+          cart.splice(item, 1);
         }
+        break;
+      }
     }
     saveCart();
   }
 
   // Remove all items from cart
-  obj.removeItemFromCartAll = function(name) {
-    for(var item in cart) {
-      if(cart[item].name === name) {
+  obj.removeItemFromCartAll = function (name) {
+    for (var item in cart) {
+      if (cart[item].name === name) {
         cart.splice(item, 1);
         break;
       }
@@ -109,36 +132,36 @@ var shoppingCart = (function() {
   }
 
   // Clear cart
-  obj.clearCart = function() {
+  obj.clearCart = function () {
     cart = [];
     saveCart();
   }
 
   // Count cart 
-  obj.totalCount = function() {
+  obj.totalCount = function () {
     var totalCount = 0;
-    for(var item in cart) {
+    for (var item in cart) {
       totalCount += cart[item].count;
     }
     return totalCount.toString();
   }
 
   // Total cart
-  obj.totalCart = function() {
+  obj.totalCart = function () {
     var totalCart = 0;
-    for(var item in cart) {
+    for (var item in cart) {
       totalCart += cart[item].price * cart[item].count;
     }
     return totalCart.toString();
   }
 
   // List cart
-  obj.listCart = function() {
+  obj.listCart = function () {
     var cartCopy = [];
-    for(i in cart) {
+    for (i in cart) {
       item = cart[i];
       itemCopy = {};
-      for(p in item) {
+      for (p in item) {
         itemCopy[p] = item[p];
 
       }
@@ -167,7 +190,7 @@ var shoppingCart = (function() {
 // Triggers / Events
 // ***************************************** 
 // Add item
-$('.add-to-cart').click(function(event) {
+$('.add-to-cart').click(function (event) {
   event.preventDefault();
   var name = $(this).data('name');
   var price = Number($(this).data('price'));
@@ -176,7 +199,7 @@ $('.add-to-cart').click(function(event) {
 });
 
 // Clear items
-$('.clear-cart').click(function() {
+$('.clear-cart').click(function () {
   shoppingCart.clearCart();
   carritoEnTexto = "";
   displayCart();
@@ -187,35 +210,35 @@ function displayCart() {
   var cartArray = shoppingCart.listCart();
   var output = "";
   for (var i in cartArray) {
-     output += "<tr>"
-        + "<td id='name' style='word-break: break-all;'>" + cartArray[i].name + "</td>"
-        + "<td id='value'>(" + cartArray[i].price + ")</td>"
-        + "<td><div class='input-group'>"
-        /* + "<button class='minus-item input-group-addon btn btn-primary' data-name=" + cartArray[i].name + ">-</button>" */
-        + "<input type='number' class='item-count form-control' disabled data-name='" + cartArray[i].name + "' id='cant' value='" + cartArray[i].count + "'>"
-        /* + "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name + ">+</button>" */
-        "</div></td>"
-        + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
-        + " = "
-        + "<td id='total_cant' style='font-size: 10px;'>" + cartArray[i].total + "</td>"
-        + "</tr>";
+    output += "<tr>"
+      + "<td id='name' style='word-break: break-all;'>" + cartArray[i].name + "</td>"
+      + "<td id='value'>(" + cartArray[i].price + ")</td>"
+      + "<td><div class='input-group'>"
+      /* + "<button class='minus-item input-group-addon btn btn-primary' data-name=" + cartArray[i].name + ">-</button>" */
+      + "<input type='number' class='item-count form-control' disabled data-name='" + cartArray[i].name + "' id='cant' value='" + cartArray[i].count + "'>"
+    /* + "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name + ">+</button>" */
+    "</div></td>"
+      + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
+      + " = "
+      + "<td id='total_cant' style='font-size: 10px;'>" + cartArray[i].total + "</td>"
+      + "</tr>";
   }
   $('.show-cart').html(output);
   $('.total-cart').html(shoppingCart.totalCart());
   $('.total-count').html(shoppingCart.totalCount());
 
   if (cartArray.length > 0) {
-     let espacio = "%20";
-     let textoFormateado = espacio + "(" + "x" + cartArray[i].count + espacio + cartArray[i].name + espacio + "de" + espacio + cartArray[i].price + espacio + ")" + espacio;
-     carritoEnTexto = agregaTextoABase(carritoEnTexto, "", textoFormateado);
-     console.log("Esto es carrito ----> " + carritoEnTexto);
+    let espacio = "%20";
+    let textoFormateado = espacio + "(" + "x" + cartArray[i].count + espacio + cartArray[i].name + espacio + "de" + espacio + cartArray[i].price + espacio + ")" + espacio;
+    carritoEnTexto = agregaTextoABase(carritoEnTexto, "", textoFormateado);
+    console.log("Esto es carrito ----> " + carritoEnTexto);
   }
   // Agrega texto a los elemtos que se muestran en el carrito.¡
 }
 
 // Delete item button
 
-$('.show-cart').on("click", ".delete-item", function(event) {
+$('.show-cart').on("click", ".delete-item", function (event) {
   var name = $(this).data('name')
   shoppingCart.removeItemFromCartAll(name);
   displayCart();
@@ -223,22 +246,22 @@ $('.show-cart').on("click", ".delete-item", function(event) {
 
 
 // -1
-$('.show-cart').on("click", ".minus-item", function(event) {
+$('.show-cart').on("click", ".minus-item", function (event) {
   var name = $(this).data('name')
   shoppingCart.removeItemFromCart(name);
   displayCart();
 })
 // +1
-$('.show-cart').on("click", ".plus-item", function(event) {
+$('.show-cart').on("click", ".plus-item", function (event) {
   var name = $(this).data('name')
   shoppingCart.addItemToCart(name);
   displayCart();
 })
 
 // Item count input
-$('.show-cart').on("change", ".item-count", function(event) {
-   var name = $(this).data('name');
-   var count = Number($(this).val());
+$('.show-cart').on("change", ".item-count", function (event) {
+  var name = $(this).data('name');
+  var count = Number($(this).val());
   shoppingCart.setCountForItem(name, count);
   displayCart();
 });
@@ -440,13 +463,14 @@ else {
   }());
 }
 
-
 popupWhatsApp = () => {
 
   let btnClosePopup = document.querySelector('.closePopup');
   let btnOpenPopup = document.querySelector('.whatsapp-button');
   let popup = document.querySelector('.popup-whatsapp');
-  let sendBtn = document.getElementById('send-btn');
+  let sendBtn_1 = document.getElementById('send-btn-1');
+  let sendBtn_2 = document.getElementById('send-btn-2');
+  let sendBtn_3 = document.getElementById('send-btn-3');
 
   btnClosePopup.addEventListener("click", () => {
     popup.classList.toggle('is-active-whatsapp-popup')
@@ -457,39 +481,53 @@ popupWhatsApp = () => {
     popup.style.animation = "fadeIn .6s 0.0s both";
   })
 
-  sendBtn.addEventListener("click", () => {
+  sendBtn_1.addEventListener("click", () => {
     let msg = document.getElementById('whats-in').value;
     let relmsg = msg.replace(/ /g, "%20");
     //just change the numbers "1515551234567" for your number. Don't use +001-(555)1234567     
     window.open('https://wa.me/573105771388?text=' + relmsg, '_blank');
-
   });
+
+  sendBtn_2.addEventListener("click", () => {
+    let msg = document.getElementById('whats-in').value;
+    let relmsg = msg.replace(/ /g, "%20");
+    //just change the numbers "1515551234567" for your number. Don't use +001-(555)1234567     
+    window.open('https://wa.me/573124872583?text=' + relmsg, '_blank');
+  });
+
+  sendBtn_3.addEventListener("click", () => {
+    let msg = document.getElementById('whats-in').value;
+    let relmsg = msg.replace(/ /g, "%20");
+    //just change the numbers "1515551234567" for your number. Don't use +001-(555)1234567     
+    window.open('https://wa.me/573161680412?text=' + relmsg, '_blank');
+  });
+
   /* Open pop-up in 15 seconds */
   /* setTimeout(() => {
     popup.classList.toggle('is-active-whatsapp-popup');
-  }, 15000); */
-}
+  }, 8000); */
 
+}
 let btnModal = document.getElementById('modal-data');
 var modal = document.getElementById("cart");
 var modalClose = document.getElementById("close-modal-data");
 var modalCloseX = document.getElementById("close-x");
 
 btnModal.addEventListener("click", () => {
-  modal.style.display="none";
+  modal.style.display = "none";
 });
 
 modalClose.addEventListener("click", () => {
-  modal.style.display="unset";
+  modal.style.display = "unset";
 });
 
 modalCloseX.addEventListener("click", () => {
-  modal.style.display="unset";
+  modal.style.display = "unset";
 });
 
 
 /* sendOrder = () => { */
-  
+
 let sendOrderBtn = document.getElementById('send_order');
 sendOrderBtn.addEventListener("click", () => {
 
@@ -497,35 +535,35 @@ sendOrderBtn.addEventListener("click", () => {
   let tel = document.getElementById('tel_user').value;
   let dir = document.getElementById('dir_user').value;
 
-  if (name == null || tel == null || dir == null 
-    || name == "" || tel == "" || dir == ""){  
-    return alert('Por favor llene los campos correspondientes.'); ;  
+  if (name == null || tel == null || dir == null
+    || name == "" || tel == "" || dir == "") {
+    return alert('Por favor llene los campos correspondientes.');;
   } else {
     var name_user = document.getElementById('name_user').value;
-    let name_user_uri = name_user.replace(/ /g,"%20").replace(/#/g, "Num.");
+    let name_user_uri = name_user.replace(/ /g, "%20").replace(/#/g, "Num.");
     var tel_user = document.getElementById('tel_user').value;
-    let tel_user_uri = tel_user.replace(/ /g,"%20").replace(/#/g, "Num.");
+    let tel_user_uri = tel_user.replace(/ /g, "%20").replace(/#/g, "Num.");
     var dir_user = document.getElementById('dir_user').value;
-    let dir_user_uri = dir_user.replace(/ /g,"%20").replace(/#/g, "Num.");
+    let dir_user_uri = dir_user.replace(/ /g, "%20").replace(/#/g, "Num.");
     let msg = document.getElementById('send_order').value;
-    let relmsg = msg.replace(/ /g,"%20");
+    let relmsg = msg.replace(/ /g, "%20");
     var total_order = document.getElementById("total_order").innerHTML.toString();
 
-   window.open('https://wa.me/573105771388?text='+ relmsg + "%0a"
-  + "---------------------------------" + "%0a"
-  + "       DATOS DEL PEDIDO          " + "%0a"
-  + "---------------------------------" + "%0a"
-  + carritoEnTexto + "%0a"
-  + "Total orden: $" + "%0a"
-  + "---------------------------------" + "%0a"
-  + "       DATOS DE CONTACTO          " + "%0a"
-  + "---------------------------------" + "%0a"
-  + "Nombre: " + name_user_uri + "%0a"
-  + "Teléfono:" + tel_user_uri + "%0a" 
-  + "Dirección: " + dir_user_uri + "%0a"
-  + "---------------------------------" + "%0a"
-  + "Muchas gracias.",
-  '_blank'); 
+    window.open('https://wa.me/573105771388?text=' + relmsg + "%0a"
+      + "---------------------------------" + "%0a"
+      + "       DATOS DEL PEDIDO          " + "%0a"
+      + "---------------------------------" + "%0a"
+      + carritoEnTexto + "%0a"
+      + "Total orden: $" + "%0a"
+      + "---------------------------------" + "%0a"
+      + "       DATOS DE CONTACTO          " + "%0a"
+      + "---------------------------------" + "%0a"
+      + "Nombre: " + name_user_uri + "%0a"
+      + "Teléfono:" + tel_user_uri + "%0a"
+      + "Dirección: " + dir_user_uri + "%0a"
+      + "---------------------------------" + "%0a"
+      + "Muchas gracias.",
+      '_blank');
   }
 });
 /* } */
@@ -535,7 +573,10 @@ function loader() {
   document.querySelector('.loader-container').classList.add('fade-out');
 }
 
-window.onload=function () {
+
+
+
+window.onload = function () {
   shoppingCart.clearCart();
   carritoEnTexto = "";
   displayCart();
