@@ -526,67 +526,149 @@ modalCloseX.addEventListener("click", () => {
 });
 
 
-/* sendOrder = () => { */
+sendOrder1 = () => {
 
-let sendOrderBtn = document.getElementById('send_order');
-sendOrderBtn.addEventListener("click", () => {
+  let sendOrderBtn = document.getElementById('send_order1');
+  sendOrderBtn.addEventListener("click", () => {
 
-  let name = document.getElementById('name_user').value;
-  let tel = document.getElementById('tel_user').value;
-  let dir = document.getElementById('dir_user').value;
+    let name = document.getElementById('name_user').value;
+    let tel = document.getElementById('tel_user').value;
+    let dir = document.getElementById('dir_user').value;
 
-  if (name == null || tel == null || dir == null
-    || name == "" || tel == "" || dir == "") {
-    return alert('Por favor llene los campos correspondientes.');;
-  } else {
-    var name_user = document.getElementById('name_user').value;
-    let name_user_uri = name_user.replace(/ /g, "%20").replace(/#/g, "Num.");
-    var tel_user = document.getElementById('tel_user').value;
-    let tel_user_uri = tel_user.replace(/ /g, "%20").replace(/#/g, "Num.");
-    var dir_user = document.getElementById('dir_user').value;
-    let dir_user_uri = dir_user.replace(/ /g, "%20").replace(/#/g, "Num.");
-    let msg = document.getElementById('send_order').value;
-    let relmsg = msg.replace(/ /g, "%20");
-    var total_order = document.getElementById("total_order").innerHTML.toString();
+    if (name == null || tel == null || dir == null
+      || name == "" || tel == "" || dir == "") {
+      return alert('Por favor llene los campos correspondientes.');;
+    } else {
+      var name_user = document.getElementById('name_user').value;
+      let name_user_uri = name_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var tel_user = document.getElementById('tel_user').value;
+      let tel_user_uri = tel_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var dir_user = document.getElementById('dir_user').value;
+      let dir_user_uri = dir_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      let msg = document.getElementById('send_order1').value;
+      let relmsg = msg.replace(/ /g, "%20");
+      var total_order = document.getElementById("total_order").innerHTML.toString();
 
-    window.open('https://wa.me/573105771388?text=' + relmsg + "%0a"
-      + "---------------------------------" + "%0a"
-      + "       DATOS DEL PEDIDO          " + "%0a"
-      + "---------------------------------" + "%0a"
-      + carritoEnTexto + "%0a"
-      + "Total orden: $" + "%0a"
-      + "---------------------------------" + "%0a"
-      + "       DATOS DE CONTACTO          " + "%0a"
-      + "---------------------------------" + "%0a"
-      + "Nombre: " + name_user_uri + "%0a"
-      + "Teléfono:" + tel_user_uri + "%0a"
-      + "Dirección: " + dir_user_uri + "%0a"
-      + "---------------------------------" + "%0a"
-      + "Muchas gracias.",
-      '_blank');
-  }
-});
-/* } */
+      window.open('https://wa.me/573105771388?text=' + relmsg + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DEL PEDIDO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + carritoEnTexto + "%0a"
+        + "Total orden: $" + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DE CONTACTO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Nombre: " + name_user_uri + "%0a"
+        + "Teléfono:" + tel_user_uri + "%0a"
+        + "Dirección: " + dir_user_uri + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Muchas gracias.",
+        '_blank');
+    }
+  });
+}
+
+sendOrder2 = () => {
+
+  let sendOrderBtn = document.getElementById('send_order2');
+  sendOrderBtn.addEventListener("click", () => {
+
+    let name = document.getElementById('name_user').value;
+    let tel = document.getElementById('tel_user').value;
+    let dir = document.getElementById('dir_user').value;
+
+    if (name == null || tel == null || dir == null
+      || name == "" || tel == "" || dir == "") {
+      return alert('Por favor llene los campos correspondientes.');;
+    } else {
+      var name_user = document.getElementById('name_user').value;
+      let name_user_uri = name_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var tel_user = document.getElementById('tel_user').value;
+      let tel_user_uri = tel_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var dir_user = document.getElementById('dir_user').value;
+      let dir_user_uri = dir_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      let msg = document.getElementById('send_order2').value;
+      let relmsg = msg.replace(/ /g, "%20");
+      var total_order = document.getElementById("total_order").innerHTML.toString();
+
+      window.open('https://wa.me/573124872583?text=' + relmsg + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DEL PEDIDO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + carritoEnTexto + "%0a"
+        + "Total orden: $" + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DE CONTACTO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Nombre: " + name_user_uri + "%0a"
+        + "Teléfono:" + tel_user_uri + "%0a"
+        + "Dirección: " + dir_user_uri + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Muchas gracias.",
+        '_blank');
+    }
+  });
+}
+
+sendOrder3 = () => {
+
+  let sendOrderBtn = document.getElementById('send_order3');
+  sendOrderBtn.addEventListener("click", () => {
+
+    let name = document.getElementById('name_user').value;
+    let tel = document.getElementById('tel_user').value;
+    let dir = document.getElementById('dir_user').value;
+
+    if (name == null || tel == null || dir == null
+      || name == "" || tel == "" || dir == "") {
+      return alert('Por favor llene los campos correspondientes.');;
+    } else {
+      var name_user = document.getElementById('name_user').value;
+      let name_user_uri = name_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var tel_user = document.getElementById('tel_user').value;
+      let tel_user_uri = tel_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      var dir_user = document.getElementById('dir_user').value;
+      let dir_user_uri = dir_user.replace(/ /g, "%20").replace(/#/g, "Num.");
+      let msg = document.getElementById('send_order3').value;
+      let relmsg = msg.replace(/ /g, "%20");
+      var total_order = document.getElementById("total_order").innerHTML.toString();
+
+      window.open('https://wa.me/573161680412?text=' + relmsg + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DEL PEDIDO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + carritoEnTexto + "%0a"
+        + "Total orden: $" + "%0a"
+        + "---------------------------------" + "%0a"
+        + "       DATOS DE CONTACTO          " + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Nombre: " + name_user_uri + "%0a"
+        + "Teléfono:" + tel_user_uri + "%0a"
+        + "Dirección: " + dir_user_uri + "%0a"
+        + "---------------------------------" + "%0a"
+        + "Muchas gracias.",
+        '_blank');
+    }
+  });
+}
 /* } */
 
 function loader() {
   document.querySelector('.loader-container').classList.add('fade-out');
 }
 
-
-
-
 window.onload = function () {
   shoppingCart.clearCart();
   carritoEnTexto = "";
   displayCart();
+  fadeOut();
 }
 
 function fadeOut() {
   setInterval(loader, 3000);
 }
 
-window.onload = fadeOut();
-
-/* sendOrder(); */
+sendOrder1();
+sendOrder2();
+sendOrder3();
 popupWhatsApp();

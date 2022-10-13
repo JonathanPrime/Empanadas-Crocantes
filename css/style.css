@@ -75,6 +75,7 @@ p {
 }
 .m-cart {
   font-size: 2rem !important;
+  margin: 0.4rem;
 }
 
 
@@ -107,6 +108,20 @@ p {
 }
 
 .btn-contact:hover {
+  color:  var(--black) !important;
+  background: no-repeat !important;
+}
+
+.btn-terciary {
+  display: inline-block !important;
+  cursor: pointer !important; 
+  color: var(--white) !important;
+  background:  var(--black) !important;
+  border: 0.2rem solid var(--black) !important;
+  font-size: 2rem !important;
+}
+
+.btn-terciary:hover {
   color: var(--white) !important;
   background:  var(--black) !important;
 }
@@ -1080,7 +1095,13 @@ a:visited { text-decoration: none }
 }
 
 .modal-footer {
-  justify-content: space-around;
+  justify-content: center !important;
+}
+
+.send-order-sedes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .modal-dialog {
@@ -1106,16 +1127,15 @@ a:visited { text-decoration: none }
 
 .modal input {
   position: relative;
-  border-radius: 3px;
+  border-radius: 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   outline: none;
   padding: 1.125em 0 6px 6px;
-  font-size: 1.25em;
   margin: 0px 0px 9px 0px;
-  border: 1px solid #dddddd;
+  border: 2px solid #cbcbcb;
   color: #444;
 }
 
